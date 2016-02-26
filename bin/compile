@@ -265,9 +265,8 @@ case $TOOL in
         cd $build
         step "Running: gb build ${FLAGS[@]}"
         #gb build "${FLAGS[@]}"
-        pwd
-        ls -R
-        cd ./src && make
+        cd ./src
+        make -C api
         step "Post Compile Cleanup"
         for f in bin/*-heroku; do mv "$f" "${f/-heroku}"; done
         rm -rf pkg
