@@ -269,7 +269,7 @@ case $TOOL in
         make -C api
         step "Post Compile Cleanup"
         step "Where is my app binary?"
-        ls -R /home/app/vapp/
+        ls -R /home/
         #for f in bin/*-heroku; do mv "$f" "${f/-heroku}"; done
         #rm -rf pkg
     ;;
