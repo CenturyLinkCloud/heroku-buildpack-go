@@ -268,8 +268,8 @@ case $TOOL in
         cd ./src
         make -C api
         step "Post Compile Cleanup"
-        for f in bin/*-heroku; do mv "$f" "${f/-heroku}"; done
-        rm -rf pkg
+        #for f in bin/*-heroku; do mv "$f" "${f/-heroku}"; done
+        #rm -rf pkg
     ;;
 esac
 
