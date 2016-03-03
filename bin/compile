@@ -134,6 +134,7 @@ else
     warn "Godep or GB are required. For instructions:"
     warn "https://devcenter.heroku.com/articles/go-support"
     warn "Actually for SafeHaven, we don't need Geodep or GB at all. Continue"
+    TOOL="make"
 fi
 
 ver=$(expand_ver $ver)
@@ -261,7 +262,8 @@ case $TOOL in
             go install ./...
             finished
         fi
-
+    ;;
+    make)
         cd $build
         step "Running: gb build ${FLAGS[@]}"
         #gb build "${FLAGS[@]}"
