@@ -133,7 +133,7 @@ then
 else
     warn "Godep or GB are required. For instructions:"
     warn "https://devcenter.heroku.com/articles/go-support"
-    exit 1
+    warn "Actually for SafeHaven, we don't need Geodep or GB at all. Continue"
 fi
 
 ver=$(expand_ver $ver)
