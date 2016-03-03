@@ -265,8 +265,9 @@ case $TOOL in
         fi
     ;;
     make)
+        PATH=$GOPATH/bin:$GOROOT/bin:$PATH export PATH
         cd $build
-        step "Running: gb build ${FLAGS[@]}"
+        step "Running make inside the api folder. PWd=`pwd`"
         #gb build "${FLAGS[@]}"
         cd api
         make
