@@ -129,12 +129,6 @@ then
 elif (test -d "$build/src" && test -n "$(find "$build/src" -type f -name '*.go' | sed 1q)")
 then
     ver=${GOVERSION:-$DEFAULT_GO_VERSION}
-    TOOL="gb"
-else
-    warn "Godep or GB are required. For instructions:"
-    warn "https://devcenter.heroku.com/articles/go-support"
-    warn "Actually for SafeHaven, we don't need Geodep or GB at all. Continue"
-    ver=${GOVERSION:-$DEFAULT_GO_VERSION}
     TOOL="make"
 fi
 
@@ -239,39 +233,15 @@ case $TOOL in
             godep go install "${FLAGS[@]}" $pkgs
         fi
     ;;
-    gb)
-        warn ""
-        warn "GB support is in beta"
-        warn "Please see https://devcenter.heroku.com/articles/go-dependencies-via-gb for more info"
-        warn "For support please file a support issue: https://help.heroku.com"
-        warn ""
-
-        gbver="0.4.0"
-        GOPATH="$cache/gb/$gbver" export GOPATH
-        PATH=$GOPATH/bin:$GOROOT/bin:$PATH export PATH
-        cp="$GOPATH/src/github.com/constabulary"
-        if test -d "$GOPATH"
-        then
-            step "Using GB $gbver"
-        else
-            rm -rf "$cache/gb/*" # cruft bad
-            mkdir -p "$cp"
-            cd $cp
-            start "Installing GB v$gbver"
-            curl -s "https://codeload.github.com/constabulary/gb/tar.gz/v$gbver" | tar zxf -
-            mv gb-$gbver gb
-            go install ./...
-            finished
-        fi
-    ;;
     make)
+        export GOPATH=`pwd`
         PATH=$GOPATH/bin:$GOROOT/bin:$PATH export PATH
         cd $build
         step "Running make inside the api folder. PWd=`pwd`"
         step "local folders are `ls`"
 
         #gb build "${FLAGS[@]}"
-        cd api
+        cd src/api
         make
         step "Post Compile Cleanup"
         #for f in bin/*-heroku; do mv "$f" "${f/-heroku}"; done
