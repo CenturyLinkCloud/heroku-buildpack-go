@@ -268,6 +268,8 @@ case $TOOL in
         PATH=$GOPATH/bin:$GOROOT/bin:$PATH export PATH
         cd $build
         step "Running make inside the api folder. PWd=`pwd`"
+        step "local folders are `ls`"
+
         #gb build "${FLAGS[@]}"
         cd api
         make
