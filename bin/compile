@@ -145,6 +145,10 @@ then
     exit 1
 fi
 
+start "Installing Mercurial"
+    pip install mercurial > /dev/null 2>&1
+finished
+
 report_ver $ver
 
 if test -d $cache/$ver/go
