@@ -155,6 +155,8 @@ start "Installing Virtualenv"
 finished
 
 start "Installing Mercurial"
+    warn "$(which pip)"
+    warn "$(ls $venv/bin)"
     pip install mercurial > /dev/null 2>&1
 finished
 
