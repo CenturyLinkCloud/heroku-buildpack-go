@@ -146,7 +146,7 @@ then
 fi
 
 start "Installing Mercurial"
-    pip install mercurial > /dev/null 2>&1
+    /app/.heroku/python/bin/pip install  mercurial | cleanup | indent
 finished
 
 report_ver $ver
