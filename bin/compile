@@ -79,6 +79,10 @@ python=python2.7
 PATH=$buildpack/$plat/bin:$venv/bin:$PATH
 steptxt="----->"
 
+virtualenv() {
+    python "$buildpack/vendor/virtualenv-1.11.6/virtualenv.py" "$@"
+}
+
 warn() {
     echo -e >&2 "${YELLOW} !     $@${NC}"
 }
@@ -145,9 +149,13 @@ then
     exit 1
 fi
 
+start "Installing Virtualenv"
+    virtualenv --python $python --distribute --never-download --prompt='(venv) ' $venv > /dev/null 2>&1
+    . $venv/bin/activate > /dev/null 2>&1
+finished
+
 start "Installing Mercurial"
-    warn "$(which pip)"
-    pip install mercurial
+    pip install mercurial > /dev/null 2>&1
 finished
 
 report_ver $ver
