@@ -154,10 +154,6 @@ start "Installing Virtualenv"
     . $venv/bin/activate > /dev/null 2>&1
 finished
 
-start "Installing Mercurial"
-    apt-get install mercurial
-finished
-
 report_ver $ver
 
 if test -d $cache/$ver/go
