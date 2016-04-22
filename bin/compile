@@ -155,6 +155,7 @@ start "Installing Virtualenv"
 finished
 
 start "Installing Mercurial"
+    warn "$(lsb_release -a)"
     warn "$(pip install mercurial)"
 finished
 
